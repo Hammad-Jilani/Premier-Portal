@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class AccessControlFormService {
 
         accessControlFormHistory.setPhysicalAccess(accessControlForm.getPhysicalAccess());
         accessControlFormHistory.setPhone_number(accessControlForm.getPhone_number());
-        accessControlFormHistory.setModifiedAt(LocalDate.from(ZonedDateTime.now()));
+        accessControlFormHistory.setModifiedAt(LocalDateTime.now());
         accessControlFormHistory.setLastName(accessControlForm.getLastName());
         accessControlFormHistory.setMiddleName(accessControlForm.getMiddleName());
         accessControlFormHistory.setFirstName(accessControlForm.getFirstName());
@@ -109,7 +110,7 @@ public class AccessControlFormService {
 
         accessControlFormHistory.setPhysicalAccess(form.getPhysicalAccess());
         accessControlFormHistory.setPhone_number(form.getPhone_number());
-        accessControlFormHistory.setModifiedAt(LocalDate.from(ZonedDateTime.now()));
+        accessControlFormHistory.setModifiedAt(LocalDateTime.now());
         accessControlFormHistory.setLastName(form.getLastName());
         accessControlFormHistory.setMiddleName(form.getMiddleName());
         accessControlFormHistory.setFirstName(form.getFirstName());

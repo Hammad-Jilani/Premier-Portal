@@ -33,8 +33,8 @@ function Navbar() {
           <Link to="/create-access-control-form" className="hover:underline">
             Create Access Form
           </Link>
-          <Link to="/inbox" className="hover:underline">
-            Inbox
+          <Link to="/Create-Media-Disposal-Form" className="hover:underline">
+            Create Media Disposal Form
           </Link>
           <Link to="/calendar" className="hover:underline">
             Calendar
@@ -73,8 +73,8 @@ function Navbar() {
           <Link to="/create-access-control-form" className="hover:underline">
             Create Access Form
           </Link>
-          <Link to="/inbox" className="hover:underline">
-            Inbox
+          <Link to="/Create-Media-Disposal-Form" className="hover:underline">
+            Create Media Disposal Form
           </Link>
           <Link to="/calendar" className="hover:underline">
             Calendar

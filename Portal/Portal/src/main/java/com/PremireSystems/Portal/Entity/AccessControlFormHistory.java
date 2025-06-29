@@ -3,6 +3,7 @@ package com.PremireSystems.Portal.Entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -43,11 +44,11 @@ public class AccessControlFormHistory {
     private LocalDate endDate;
     private String userAcknowledgementRemarks;
 
-    private LocalDate modifiedAt;
+    private LocalDateTime modifiedAt;
 
     public AccessControlFormHistory(){}
 
-    public AccessControlFormHistory(Long history_id, String employeeId, String firstName, String middleName, String lastName, String department, LocalDate joining, String phone_number, String designation, String userStatus, String accessPeriod, String hrSecurity, String operationStatus, List<String> physicalAccess, List<String> logicalAccess, List<ApplicationAccessFormRightsHistory> applicationAccessRightsListHistory, String loginIdAction, LocalDate createDateAction, String emailAddressAction, String remarks, LocalDate startDate, LocalDate endDate, String userAcknowledgementRemarks, LocalDate modifiedAt) {
+    public AccessControlFormHistory(Long history_id, String employeeId, String firstName, String middleName, String lastName, String department, LocalDate joining, String phone_number, String designation, String userStatus, String accessPeriod, String hrSecurity, String operationStatus, List<String> physicalAccess, List<String> logicalAccess, List<ApplicationAccessFormRightsHistory> applicationAccessRightsListHistory, String loginIdAction, LocalDate createDateAction, String emailAddressAction, String remarks, LocalDate startDate, LocalDate endDate, String userAcknowledgementRemarks, LocalDateTime modifiedAt) {
         this.history_id = history_id;
         this.employeeId = employeeId;
         this.firstName = firstName;
@@ -258,11 +259,11 @@ public class AccessControlFormHistory {
         this.userAcknowledgementRemarks = userAcknowledgementRemarks;
     }
 
-    public LocalDate getModifiedAt() {
+    public LocalDateTime getModifiedAt() {
         return modifiedAt;
     }
 
-    public void setModifiedAt(LocalDate modifiedAt) {
+    public void setModifiedAt(LocalDateTime modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
 }

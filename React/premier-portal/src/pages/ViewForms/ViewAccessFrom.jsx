@@ -79,83 +79,101 @@ function ViewAccessFrom() {
   }
 
   return (
-    <div className="mt-10 w-4/5 m-auto text-center">
-      <Table>
-        <TableCaption></TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Employee ID</TableHead>
-            <TableHead>First Name</TableHead>
-            <TableHead>Last Name</TableHead>
-            <TableHead>Department</TableHead>
-            <TableHead>Date Of Joining</TableHead>
-            <TableHead>Designation</TableHead>
-            <TableHead>User Status</TableHead>
-            <TableHead>Access Period</TableHead>
-            <TableHead>Start Date</TableHead>
-            <TableHead>End Date</TableHead>
-            <TableHead>Physical Access</TableHead>
-            <TableHead>Logical Access</TableHead>
-            <TableHead>Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {accessForm.length &&
-            accessForm.map((form) => (
-              <TableRow key={form.accessControlId}>
-                <TableCell>{form.employeeId}</TableCell>
-                <TableCell>{form.firstName}</TableCell>
-                <TableCell>{form.lastName}</TableCell>
-                <TableCell>{form.department}</TableCell>
-                <TableCell>{form.joining}</TableCell>
-                <TableCell>{form.designation}</TableCell>
-                <TableCell>{form.userStatus}</TableCell>
-                <TableCell>{form.accessPeriod}</TableCell>
-                {form.accessPeriod == "Temporary" ? (
-                  <TableCell>{form.startDate}</TableCell>
-                ) : (
-                  <TableCell>-</TableCell>
-                )}
-                {form.accessPeriod == "Temporary" ? (
-                  <TableCell>{form.endDate}</TableCell>
-                ) : (
-                  <TableCell>-</TableCell>
-                )}
-                <TableCell>
-                  {form.physicalAccess.map((a) => {
-                    return <div>{a}</div>;
-                  })}
-                </TableCell>
-                <TableCell>
-                  {form.logicalAccess.map((a) => {
-                    return <div>{a}</div>;
-                  })}
-                </TableCell>
-                <TableCell>
-                  <Button className="bg-blue-400 hover:underline p-3 mr-3 rounded-xl">
-                    <Link to={`/View-Access-Form-Item/${form.accessControlId}`}>
-                      View
-                    </Link>
-                  </Button>
+    <div className="mt-10 w-11/12 lg:w-4/5 mx-auto">
+      <div className="overflow-x-auto shadow-lg rounded-2xl">
+        <Table className="min-w-full text-sm text-left text-gray-700">
+          <TableHeader className="bg-gray-100 text-gray-800 uppercase text-sm">
+            <TableRow>
+              <TableHead className="p-4">Employee ID</TableHead>
+              <TableHead className="p-4">First Name</TableHead>
+              <TableHead className="p-4">Last Name</TableHead>
+              <TableHead className="p-4">Department</TableHead>
+              <TableHead className="p-4">Date Of Joining</TableHead>
+              <TableHead className="p-4">Designation</TableHead>
+              <TableHead className="p-4">User Status</TableHead>
+              <TableHead className="p-4">Access Period</TableHead>
+              <TableHead className="p-4">Start Date</TableHead>
+              <TableHead className="p-4">End Date</TableHead>
+              <TableHead className="p-4">Physical Access</TableHead>
+              <TableHead className="p-4">Logical Access</TableHead>
+              <TableHead className="p-4 text-center">Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {accessForm.length !== 0 ? (
+              accessForm.map((form) => (
+                <TableRow
+                  key={form.accessControlId}
+                  className="hover:bg-gray-50 transition duration-200"
+                >
+                  <TableCell>{form.employeeId}</TableCell>
+                  <TableCell>{form.firstName}</TableCell>
+                  <TableCell>{form.lastName}</TableCell>
+                  <TableCell>{form.department}</TableCell>
+                  <TableCell>{form.joining}</TableCell>
+                  <TableCell>{form.designation}</TableCell>
+                  <TableCell>{form.userStatus}</TableCell>
+                  <TableCell>{form.accessPeriod}</TableCell>
+                  {form.accessPeriod == "Temporary" ? (
+                    <TableCell>{form.startDate}</TableCell>
+                  ) : (
+                    <TableCell>-</TableCell>
+                  )}
+                  {form.accessPeriod == "Temporary" ? (
+                    <TableCell>{form.endDate}</TableCell>
+                  ) : (
+                    <TableCell>-</TableCell>
+                  )}
+                  <TableCell>
+                    {form.physicalAccess.map((a) => {
+                      return <div>{a}</div>;
+                    })}
+                  </TableCell>
+                  <TableCell>
+                    {form.logicalAccess.map((a) => {
+                      return <div>{a}</div>;
+                    })}
+                  </TableCell>
+                  <TableCell>
+                    <Button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-xl shadow-sm transition duration-200">
+                      <Link
+                        to={`/View-Access-Form-Item/${form.accessControlId}`}
+                      >
+                        View
+                      </Link>
+                    </Button>
 
-                  <Button
-                    className="bg-red-500 hover:underline p-3 rounded-xl"
-                    to={`/View-Access-Form-Item/:${form.accessControlId}`}
-                    onClick={() => deleteById(form.accessControlId)}
-                  >
-                    Delete
-                  </Button>
+                    <Button
+                      className="bg-red-500 hover:underline p-3 rounded-xl"
+                      to={`/View-Access-Form-Item/:${form.accessControlId}`}
+                      onClick={() => deleteById(form.accessControlId)}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan="13"
+                  className="text-center p-6 text-gray-500"
+                >
+                  No Access Control Form
                 </TableCell>
               </TableRow>
-            ))}
-        </TableBody>
-      </Table>
-      <Button
-        variant={"outline"}
-        className="hover:underline p-3 mr-3 rounded-xl"
-      >
-        <Link to={`/View-Access-Form-History`}>History</Link>
-      </Button>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+      <div className="text-center mt-3">
+        <Button
+          variant={"outline"}
+          className="hover:underline p-3 mr-3 rounded-xl"
+        >
+          <Link to={`/View-Access-Form-History`}>History</Link>
+        </Button>
+      </div>
     </div>
   );
 }

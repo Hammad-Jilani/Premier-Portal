@@ -15,6 +15,10 @@ import ViewAccessFrom from "./pages/ViewForms/ViewAccessFrom";
 import AccessControlFormItem from "./pages/Forms/AccessControlFormItem";
 import { Toaster } from "sonner";
 import ControlFormHistory from "./pages/History/ControlFormHistory";
+import CreateMediaDisposalForm from "./pages/Forms/MediaDisposalForm/CreateMediaDisposalForm";
+import ViewMediaDisposalForm from "./pages/ViewForms/ViewMediaDisposalForm";
+import MediaDisposalFormItem from "./pages/Forms/MediaDisposalForm/MediaDisposalFormItem";
+import MediaDisposalFormHistory from "./pages/History/MediaDisposalFormHistory";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -67,6 +71,22 @@ function App() {
               path="/View-Access-Forms"
               element={<ViewAccessFrom />}
             ></Route>
+            <Route
+              path="/Create-Media-Disposal-Form"
+              element={<CreateMediaDisposalForm />}
+            ></Route>
+            <Route
+              path="/View-Media-Disposal-Form"
+              element={<ViewMediaDisposalForm />}
+            />
+            <Route
+              path="/View-Media-Disposal-Form/:id"
+              element={<MediaDisposalFormItem />}
+            />
+            <Route
+              path="/View-Media-Disposal-Form-History"
+              element={<MediaDisposalFormHistory />}
+            />
           </Routes>
         </>
       ) : (
