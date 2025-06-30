@@ -7,18 +7,22 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "./Redux/Auth/ActionType";
-import CreateAccessControlForm from "./pages/Forms/CreateAccessControlForm";
+import CreateAccessControlForm from "./pages/Forms/AccessControlForm/CreateAccessControlForm";
 import { SidebarProvider } from "./components/ui/sidebar";
 import { CirclesWithBar } from "react-loader-spinner";
 import Navbar from "./pages/Navbar/Navbar";
 import ViewAccessFrom from "./pages/ViewForms/ViewAccessFrom";
-import AccessControlFormItem from "./pages/Forms/AccessControlFormItem";
+import AccessControlFormItem from "./pages/Forms/AccessControlForm/AccessControlFormItem";
 import { Toaster } from "sonner";
 import ControlFormHistory from "./pages/History/ControlFormHistory";
 import CreateMediaDisposalForm from "./pages/Forms/MediaDisposalForm/CreateMediaDisposalForm";
 import ViewMediaDisposalForm from "./pages/ViewForms/ViewMediaDisposalForm";
 import MediaDisposalFormItem from "./pages/Forms/MediaDisposalForm/MediaDisposalFormItem";
 import MediaDisposalFormHistory from "./pages/History/MediaDisposalFormHistory";
+import SapForm from "./pages/Forms/SapForm/SapForm";
+import ViewSapForm from "./pages/ViewForms/ViewSapForm";
+import SapFormItem from "./pages/Forms/SapForm/SapFormItem";
+import SapAccessHistory from "./pages/History/SapAccessHistory";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -86,6 +90,16 @@ function App() {
             <Route
               path="/View-Media-Disposal-Form-History"
               element={<MediaDisposalFormHistory />}
+            />
+            <Route path={"/Create-sap-access-form"} element={<SapForm />} />
+            <Route path={"/View-SAP-Access-Form"} element={<ViewSapForm />} />
+            <Route
+              path={"/View-Sap-Access-Form/:id"}
+              element={<SapFormItem />}
+            />
+            <Route
+              path={"/Sap-Access-Form-History"}
+              element={<SapAccessHistory />}
             />
           </Routes>
         </>

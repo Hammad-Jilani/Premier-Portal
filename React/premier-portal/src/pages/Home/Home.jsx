@@ -11,9 +11,9 @@ function Home() {
           Welcome to the Control Panel
         </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <Link to="/View-Access-Forms" className="group">
-            <Card className="bg-white p-8 rounded-2xl shadow-md text-center transition-transform transform group-hover:scale-105">
+            <Card className="bg-white p-8 rounded-2xl shadow-md text-center transition-transform transform group-hover:scale-105 md:h-44">
               <h2 className="text-xl font-semibold text-gray-700 mb-2">
                 View Access Control Forms
               </h2>
@@ -24,12 +24,22 @@ function Home() {
           </Link>
 
           <Link to="/View-Media-Disposal-Form" className="group">
-            <Card className="bg-white p-8 rounded-2xl shadow-md text-center transition-transform transform group-hover:scale-105">
+            <Card className="bg-white p-8 rounded-2xl shadow-md text-center transition-transform transform group-hover:scale-105 md:h-44">
               <h2 className="text-xl font-semibold text-gray-700 mb-2">
                 View Media Disposal Forms
               </h2>
               <p className="text-gray-500">
-                Track disposed media and sanitization logs.
+                Track disposed media and sanitization.
+              </p>
+            </Card>
+          </Link>
+          <Link to="/View-SAP-Access-Form" className="group">
+            <Card className="bg-white p-8 rounded-2xl shadow-md text-center transition-transform transform group-hover:scale-105 md:h-44">
+              <h2 className="text-xl font-semibold text-gray-700 mb-2">
+                View SAP Access Forms
+              </h2>
+              <p className="text-gray-500">
+                Review all submitted SAP access requests.
               </p>
             </Card>
           </Link>

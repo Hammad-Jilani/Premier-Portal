@@ -36,8 +36,11 @@ function Navbar() {
           <Link to="/Create-Media-Disposal-Form" className="hover:underline">
             Create Media Disposal Form
           </Link>
-          <Link to="/calendar" className="hover:underline">
-            Calendar
+          <Link to="/Create-sap-access-form" className="hover:underline">
+            Create Sap Access Form
+          </Link>
+          <Link to="/Create-sap-access-form" className="hover:underline">
+            Create Sap access form
           </Link>
         </div>
 
@@ -76,8 +79,17 @@ function Navbar() {
           <Link to="/Create-Media-Disposal-Form" className="hover:underline">
             Create Media Disposal Form
           </Link>
-          <Link to="/calendar" className="hover:underline">
-            Calendar
+          <Link
+            to="/Create-sap-access-form"
+            className="hover:underline uppercase"
+          >
+            Create Sap access form
+          </Link>
+          <Link
+            to="/Create-sap-access-form"
+            className="hover:underline uppercase"
+          >
+            Create Sap access form
           </Link>
         </div>
       )}

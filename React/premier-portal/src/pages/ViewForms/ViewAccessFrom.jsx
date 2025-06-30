@@ -81,6 +81,9 @@ function ViewAccessFrom() {
   return (
     <div className="mt-10 w-11/12 lg:w-4/5 mx-auto">
       <div className="overflow-x-auto shadow-lg rounded-2xl">
+        <h1 className="text-lg font-semibold text-center mb-2">
+          View Access Control Forms
+        </h1>
         <Table className="min-w-full text-sm text-left text-gray-700">
           <TableHeader className="bg-gray-100 text-gray-800 uppercase text-sm">
             <TableRow>

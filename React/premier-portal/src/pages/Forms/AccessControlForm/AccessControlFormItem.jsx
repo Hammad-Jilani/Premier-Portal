@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../Navbar/Navbar";
-
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-} from "../../components/ui/form";
-import { Input } from "../../components/ui/input";
-import { Button } from "../../components/ui/button";
+} from "../../../components/ui/form";
+import { Input } from "../../../components/ui/input";
+import { Button } from "../../../components/ui/button";
 import { useFieldArray, useForm } from "react-hook-form";
-import { Card } from "../../components/ui/card";
+import { Card } from "../../../components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { CirclesWithBar } from "react-loader-spinner";
@@ -24,10 +23,66 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useDispatch, useSelector } from "react-redux";
-import { createForm } from "../../Redux/createAccessForm/ActionType";
+import { createForm } from "../../../Redux/createAccessForm/ActionType";
 import { Loader2Icon } from "lucide-react";
+import axios from "axios";
+import { API_BASE_URL } from "../../../config/api";
+import { toast } from "sonner";
 
-function CreateAccessControlForm() {
+function AccessControlFormItem() {
+  const { id } = useParams();
+  const [formInfo, setFormInfo] = useState({});
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  async function getAccessForm() {
+    try {
+      const response = await axios.get(
+        `${API_BASE_URL}/access-control-form/getAccess/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setFormInfo(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.log("Error fetching the get method", error);
+    }
+  }
+
+  async function updateForm(data) {
+    console.log(data);
+    try {
+      const response = await axios.put(
+        `${API_BASE_URL}/access-control-form/update/${id}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      toast.success("Update Successful");
+      console.log(response.data);
+    } catch (error) {
+      console.log("Error editing ", error);
+    }
+  }
+
+  function OnhandleSubmit(data) {
+    updateForm(data);
+    navigate("/View-Access-Forms");
+    form.reset();
+  }
+
+  useEffect(() => {
+    getAccessForm();
+  }, []);
+
   const form = useForm({
     defaultValues: {
       employeeId: "",
@@ -68,17 +123,35 @@ function CreateAccessControlForm() {
 
   const accessPeriod = form.watch("accessPeriod");
 
-  const dispatch = useDispatch();
-  const { createAccessForm } = useSelector((store) => store);
+  useEffect(() => {
+    if (formInfo) {
+      form.reset({
+        employeeId: formInfo.employeeId,
+        applicationAccessRightsList: formInfo.applicationAccessRightsList,
+        firstName: formInfo.firstName,
+        middleName: formInfo.middleName,
+        lastName: formInfo.lastName,
+        department: formInfo.department,
+        designation: formInfo.designation,
+        joining: formInfo.joining,
+        phone_number: formInfo.phone_number,
+        accessPeriod: formInfo.accessPeriod,
+        hrSecurity: formInfo.hrSecurity,
+        loginIdAction: formInfo.loginIdAction,
+        remarks: formInfo.remarks,
+        userAcknowledgementRemarks: formInfo.userAcknowledgementRemarks,
+        emailAddressAction: formInfo.emailAddressAction,
+        createDateAction: formInfo.createDateAction,
+        userStatus: formInfo.userStatus,
+        physicalAccess: formInfo.physicalAccess,
+        logicalAccess: formInfo.logicalAccess,
+        startDate: formInfo.startDate,
+        endDate: formInfo.endDate,
+      });
+    }
+  }, [formInfo]);
 
-  function submit(data) {
-    dispatch(createForm(data));
-    // form.resetField("startDate");
-    // form.resetField("endDate");
-    form.reset();
-  }
-
-  if (createAccessForm.loading) {
+  if (loading) {
     return (
       <div className="w-full h-screen flex justify-center items-center bg-white">
         <CirclesWithBar
@@ -96,14 +169,13 @@ function CreateAccessControlForm() {
 
   return (
     <div>
-      {/* <Navbar /> */}
       <Card className="md:w-4/5 m-auto text-center  sm:my-7 md:my-14">
         <h1 className="font-semibold text-xl text-center sm:my-1 md:my-2">
-          Access Control Form (IT Resources & Business Application)
+          Edit Access Control Form (IT Resources & Business Application)
         </h1>
         <div className="w-4/5 m-auto">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(submit)}>
+            <form onSubmit={form.handleSubmit(OnhandleSubmit)}>
               <div className="text-center">
                 <p className=" font-semibold text-md md:text-lg lg:text-xl sm:my-2 md:my-4 lg:my-6">
                   User Information
@@ -221,7 +293,7 @@ function CreateAccessControlForm() {
                       <FormItem>
                         <Select
                           onValueChange={field.onChange}
-                          defaultValue={field.value}
+                          value={field.value}
                         >
                           <FormControl>
                             <SelectTrigger className="my-2 w-4/5">
@@ -316,7 +388,7 @@ function CreateAccessControlForm() {
                       <FormItem>
                         <Select
                           onValueChange={field.onChange}
-                          defaultValue={field.value}
+                          value={field.value}
                         >
                           <FormControl>
                             <SelectTrigger className="my-2 w-4/5">
@@ -612,7 +684,7 @@ function CreateAccessControlForm() {
                 )}
               />
 
-              <Button className="my-4">Create</Button>
+              <Button className="my-4">Update</Button>
             </form>
           </Form>
         </div>
@@ -621,4 +693,4 @@ function CreateAccessControlForm() {
   );
 }
 
-export default CreateAccessControlForm;
+export default AccessControlFormItem;

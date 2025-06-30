@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { API_BASE_URL } from "../../config/api";
 import { CirclesWithBar } from "react-loader-spinner";
 import {
@@ -13,15 +14,16 @@ import {
 } from "@/components/ui/table";
 import { Button } from "../../components/ui/button";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
-function ViewMediaDisposalForm() {
-  const [mediaForm, setMediaForm] = useState([]);
+function ViewSapForm() {
+  const [formInfo, setFormInfo] = useState();
   const [loading, setLoading] = useState(true);
 
-  async function fetchAllForms() {
+  async function getSapForm() {
     try {
       const response = await axios.get(
-        `${API_BASE_URL}/media-disposal-form/get-media-disposal-form`,
+        `${API_BASE_URL}/sap-access-form/get-all-sap-forms`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -29,10 +31,12 @@ function ViewMediaDisposalForm() {
           },
         }
       );
-      setMediaForm(response.data);
-      console.log(mediaForm);
+      setFormInfo(response.data);
+      console.log(response.data);
+
+      setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.log(formInfo);
     }
   }
 
@@ -40,7 +44,7 @@ function ViewMediaDisposalForm() {
     setLoading(true);
     try {
       const response = await axios.delete(
-        `${API_BASE_URL}/media-disposal-form/${id}`,
+        `${API_BASE_URL}/sap-access-form/delete-sap-forms/${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -48,18 +52,17 @@ function ViewMediaDisposalForm() {
           },
         }
       );
-      fetchAllForms();
+      getSapForm();
       setLoading(false);
+      toast.success(response.data);
     } catch (error) {
       console.log(error);
     }
   }
 
   useEffect(() => {
-    setLoading(false);
-    fetchAllForms();
+    getSapForm();
   }, []);
-
   if (loading) {
     return (
       <div className="w-full h-screen flex justify-center items-center bg-white">
@@ -75,42 +78,41 @@ function ViewMediaDisposalForm() {
       </div>
     );
   }
-
   return (
     <div className="mt-10 w-11/12 lg:w-4/5 mx-auto">
       <div className="overflow-x-auto shadow-lg rounded-2xl">
         <h1 className="text-lg font-semibold text-center mb-2">
-          View Media Disposal Forms
+          View SAP Access Forms
         </h1>
         <Table className="min-w-full text-sm text-left text-gray-700">
           <TableHeader className="bg-gray-100 text-gray-800 uppercase text-sm">
             <TableRow>
-              <TableHead className="p-4">Owner</TableHead>
+              <TableHead className="p-4">Employee Name</TableHead>
+              <TableHead className="p-4">Employee Number</TableHead>
+              <TableHead className="p-4">Current SAP ID</TableHead>
               <TableHead className="p-4">Department</TableHead>
-              <TableHead className="p-4">Serial No.</TableHead>
-              <TableHead className="p-4">Model</TableHead>
-              <TableHead className="p-4">Back Up</TableHead>
-              <TableHead className="p-4">Performed By</TableHead>
-              <TableHead className="p-4">Validated By</TableHead>
-              <TableHead className="p-4 text-center">Action</TableHead>
+              <TableHead className="p-4">Reviewed Up</TableHead>
+              <TableHead className="p-4">Purchasing Org</TableHead>
+              <TableHead className="p-4">Purchasing Group</TableHead>
+              <TableHead className="p-4">Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {mediaForm.length !== 0 ? (
-              mediaForm.map((form) => (
+            {formInfo.length !== 0 ? (
+              formInfo.map((form) => (
                 <TableRow
                   key={form.id}
                   className="hover:bg-gray-50 transition duration-200"
                 >
-                  <TableCell className="p-4">{form.owner}</TableCell>
+                  <TableCell className="p-4">{form.employeeName}</TableCell>
+                  <TableCell className="p-4">{form.employeeNo}</TableCell>
+                  <TableCell className="p-4">{form.currentSapId}</TableCell>
                   <TableCell className="p-4">{form.department}</TableCell>
-                  <TableCell className="p-4">{form.serialNumber}</TableCell>
-                  <TableCell className="p-4">{form.model}</TableCell>
-                  <TableCell className="p-4">{form.backUp}</TableCell>
-                  <TableCell className="p-4">{form.performedBy}</TableCell>
-                  <TableCell className="p-4">{form.validatedBy}</TableCell>
+                  <TableCell className="p-4">{form.reviewerName}</TableCell>
+                  <TableCell className="p-4">{form.purchasingOrg}</TableCell>
+                  <TableCell className="p-4">{form.purchasingGroup}</TableCell>
                   <TableCell className="p-4 text-center">
-                    <Link to={`/View-Media-Disposal-Form/${form.id}`}>
+                    <Link to={`/View-Sap-Access-Form/${form.id}`}>
                       <Button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-xl shadow-sm transition duration-200">
                         View
                       </Button>
@@ -142,11 +144,11 @@ function ViewMediaDisposalForm() {
           variant={"outline"}
           className="hover:underline p-3 mr-3 rounded-xl"
         >
-          <Link to={`/View-Media-Disposal-Form-History`}>History</Link>
+          <Link to={`/Sap-Access-Form-History`}>History</Link>
         </Button>
       </div>
     </div>
   );
 }
 
-export default ViewMediaDisposalForm;
+export default ViewSapForm;
