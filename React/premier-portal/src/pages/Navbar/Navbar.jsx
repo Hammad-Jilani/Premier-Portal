@@ -42,6 +42,12 @@ function Navbar() {
           <Link to="/Create-sap-access-form" className="hover:underline">
             Create Sap access form
           </Link>
+          <Link
+            to="/Create-Security-Incident-Report"
+            className="hover:underline"
+          >
+            Create Security Incident Report
+          </Link>
         </div>
 
         {/* Profile Dropdown */}
@@ -79,17 +85,14 @@ function Navbar() {
           <Link to="/Create-Media-Disposal-Form" className="hover:underline">
             Create Media Disposal Form
           </Link>
-          <Link
-            to="/Create-sap-access-form"
-            className="hover:underline uppercase"
-          >
+          <Link to="/Create-sap-access-form" className="hover:underline">
             Create Sap access form
           </Link>
           <Link
-            to="/Create-sap-access-form"
-            className="hover:underline uppercase"
+            to="/Create-Security-Incident-Report"
+            className="hover:underline"
           >
-            Create Sap access form
+            Create Security Incident Report
           </Link>
         </div>
       )}

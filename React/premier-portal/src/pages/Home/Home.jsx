@@ -17,7 +17,7 @@ function Home() {
               <h2 className="text-xl font-semibold text-gray-700 mb-2">
                 View Access Control Forms
               </h2>
-              <p className="text-gray-500">
+              <p className="text-gray-500 capitalize">
                 Review all submitted access requests.
               </p>
             </Card>
@@ -28,7 +28,7 @@ function Home() {
               <h2 className="text-xl font-semibold text-gray-700 mb-2">
                 View Media Disposal Forms
               </h2>
-              <p className="text-gray-500">
+              <p className="text-gray-500 capitalize">
                 Track disposed media and sanitization.
               </p>
             </Card>
@@ -38,8 +38,18 @@ function Home() {
               <h2 className="text-xl font-semibold text-gray-700 mb-2">
                 View SAP Access Forms
               </h2>
-              <p className="text-gray-500">
-                Review all submitted SAP access requests.
+              <p className="text-gray-500 capitalize">
+                Review All Submitted SAP access Requests.
+              </p>
+            </Card>
+          </Link>
+          <Link to="/View-Security-Incident-Report" className="group">
+            <Card className="bg-white p-8 rounded-2xl shadow-md text-center transition-transform transform group-hover:scale-105 md:h-44">
+              <h2 className="text-xl font-semibold text-gray-700 mb-2">
+                View Security Incident Report
+              </h2>
+              <p className="text-gray-500 capitalize">
+                Review all submitted Security Incident Reports.
               </p>
             </Card>
           </Link>

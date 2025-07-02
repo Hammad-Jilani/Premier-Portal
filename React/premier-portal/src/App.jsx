@@ -23,6 +23,10 @@ import SapForm from "./pages/Forms/SapForm/SapForm";
 import ViewSapForm from "./pages/ViewForms/ViewSapForm";
 import SapFormItem from "./pages/Forms/SapForm/SapFormItem";
 import SapAccessHistory from "./pages/History/SapAccessHistory";
+import SecurityIncidentReport from "./pages/Forms/SecurityIncidentReport/SecurityIncidentReport";
+import ViewSecurityIncidentReport from "./pages/ViewForms/ViewSecurityIncidentReport";
+import SecurityIncidentReportHistory from "./pages/History/SecurityIncidentReportHistory";
+import SecurityIncidentReportItem from "./pages/Forms/SecurityIncidentReport/SecurityIncidentReportItem";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -100,6 +104,22 @@ function App() {
             <Route
               path={"/Sap-Access-Form-History"}
               element={<SapAccessHistory />}
+            />
+            <Route
+              path={"/Create-Security-Incident-Report"}
+              element={<SecurityIncidentReport />}
+            />
+            <Route
+              path={"/View-Security-Incident-Report"}
+              element={<ViewSecurityIncidentReport />}
+            />
+            <Route
+              path={"/View-Security-Incident-Report-History"}
+              element={<SecurityIncidentReportHistory />}
+            />
+            <Route
+              path={"/View-Security-Incident-Report-History/:id"}
+              element={<SecurityIncidentReportItem />}
             />
           </Routes>
         </>
