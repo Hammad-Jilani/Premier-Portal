@@ -12,8 +12,8 @@ public class ChangeRequestForm {
 
     private String crNumber;
 
-    private boolean isNormalChange;
-    private boolean isEmergencyChange;
+    private String normalChange;
+    private String emergencyChange;
 
     private String crType;
     private String projectName;
@@ -21,8 +21,7 @@ public class ChangeRequestForm {
     private String submitterName;
     private String departmentOrLocation;
 
-    private String phone;
-    private String email;
+    private String phoneOrEmail;
 
     private LocalDate dateSubmitted;
 
@@ -50,7 +49,7 @@ public class ChangeRequestForm {
     @Column(columnDefinition = "TEXT")
     private String comments;
 
-    private boolean hasAttachments;
+    private String hasAttachments;
     private String attachmentLink;
 
     private LocalDate dateSignedBySubmitter;
@@ -109,17 +108,16 @@ public class ChangeRequestForm {
 
     public ChangeRequestForm(){}
 
-    public ChangeRequestForm(Long id, String crNumber, boolean isNormalChange, boolean isEmergencyChange, String crType, String projectName, String submitterName, String departmentOrLocation, String phone, String email, LocalDate dateSubmitted, String changeType, String otherChangeDescription, String briefDescription, LocalDate changeNeededBy, String priority, String reasonForChange, String environmentsImpacted, String assumptionsAndNotes, String comments, boolean hasAttachments, String attachmentLink, LocalDate dateSignedBySubmitter, Double hourImpact, Integer durationImpact, Double scheduleImpact, Double costImpact, String commentsBySystemOwner, String recommendations, String testPlan, String rollbackPlan, LocalDate dateSignedBySystemOwner, String decision, LocalDate decisionDate, String decisionExplanation, String conditions, LocalDate dateSigned, String implementedStatus, String stagingTestResults, String implementationTestResults, String remarks, LocalDate implementerDate) {
+    public ChangeRequestForm(Long id, String crNumber, String normalChange, String emergencyChange, String crType, String projectName, String submitterName, String departmentOrLocation, String phoneOrEmail, String email, LocalDate dateSubmitted, String changeType, String otherChangeDescription, String briefDescription, LocalDate changeNeededBy, String priority, String reasonForChange, String environmentsImpacted, String assumptionsAndNotes, String comments, String hasAttachments, String attachmentLink, LocalDate dateSignedBySubmitter, Double hourImpact, Integer durationImpact, Double scheduleImpact, Double costImpact, String commentsBySystemOwner, String recommendations, String testPlan, String rollbackPlan, LocalDate dateSignedBySystemOwner, String decision, LocalDate decisionDate, String decisionExplanation, String conditions, LocalDate dateSigned, String implementedStatus, String stagingTestResults, String implementationTestResults, String remarks, LocalDate implementerDate) {
         this.id = id;
         this.crNumber = crNumber;
-        this.isNormalChange = isNormalChange;
-        this.isEmergencyChange = isEmergencyChange;
+        this.normalChange = normalChange;
+        this.emergencyChange = emergencyChange;
         this.crType = crType;
         this.projectName = projectName;
         this.submitterName = submitterName;
         this.departmentOrLocation = departmentOrLocation;
-        this.phone = phone;
-        this.email = email;
+        this.phoneOrEmail = phoneOrEmail;
         this.dateSubmitted = dateSubmitted;
         this.changeType = changeType;
         this.otherChangeDescription = otherChangeDescription;
@@ -166,25 +164,27 @@ public class ChangeRequestForm {
         return crNumber;
     }
 
+    public String getNormalChange() {
+        return normalChange;
+    }
+
+    public void setNormalChange(String normalChange) {
+        this.normalChange = normalChange;
+    }
+
+    public String getEmergencyChange() {
+        return emergencyChange;
+    }
+
+    public void setEmergencyChange(String emergencyChange) {
+        this.emergencyChange = emergencyChange;
+    }
+
     public void setCrNumber(String crNumber) {
         this.crNumber = crNumber;
     }
 
-    public boolean isNormalChange() {
-        return isNormalChange;
-    }
 
-    public void setNormalChange(boolean normalChange) {
-        isNormalChange = normalChange;
-    }
-
-    public boolean isEmergencyChange() {
-        return isEmergencyChange;
-    }
-
-    public void setEmergencyChange(boolean emergencyChange) {
-        isEmergencyChange = emergencyChange;
-    }
 
     public String getCrType() {
         return crType;
@@ -218,20 +218,12 @@ public class ChangeRequestForm {
         this.departmentOrLocation = departmentOrLocation;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneOrEmail() {
+        return phoneOrEmail;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPhoneOrEmail(String phoneOrEmail) {
+        this.phoneOrEmail = phoneOrEmail;
     }
 
     public LocalDate getDateSubmitted() {
@@ -314,11 +306,11 @@ public class ChangeRequestForm {
         this.comments = comments;
     }
 
-    public boolean isHasAttachments() {
+    public String getHasAttachments() {
         return hasAttachments;
     }
 
-    public void setHasAttachments(boolean hasAttachments) {
+    public void setHasAttachments(String hasAttachments) {
         this.hasAttachments = hasAttachments;
     }
 

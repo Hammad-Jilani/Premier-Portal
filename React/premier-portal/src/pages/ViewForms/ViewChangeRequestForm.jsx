@@ -1,11 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import { API_BASE_URL } from "../../config/api";
 import { CirclesWithBar } from "react-loader-spinner";
 import {
   Table,
-  TableCaption,
   TableHead,
   TableHeader,
   TableRow,
@@ -14,17 +12,15 @@ import {
 } from "@/components/ui/table";
 import { Button } from "../../components/ui/button";
 import { Link } from "react-router-dom";
-import { toast } from "sonner";
 
-function ViewSecurityIncidentReport() {
-  const [formInfo, setFormInfo] = useState();
+function ViewChangeRequestForm() {
+  const [forms, setForms] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  async function getSecurityIncident() {
+  async function fetchAllForms() {
     try {
-      setLoading(true);
       const response = await axios.get(
-        `${API_BASE_URL}/security-incident-report/getAll`,
+        `${API_BASE_URL}/change-request-form/getAll`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -32,37 +28,31 @@ function ViewSecurityIncidentReport() {
           },
         }
       );
-      setFormInfo(response.data);
       console.log(response.data);
 
-      setLoading(false);
+      setForms(response.data);
     } catch (error) {
-      console.log(formInfo);
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
   }
 
   async function handleDelete(id) {
-    setLoading(true);
     try {
-      const response = await axios.delete(
-        `${API_BASE_URL}/security-incident-report/delete/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      getSecurityIncident();
-      setLoading(false);
-      toast.success(response.data);
+      await axios.delete(`${API_BASE_URL}/change-request-form/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      });
+      fetchAllForms();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
   useEffect(() => {
-    getSecurityIncident();
+    fetchAllForms();
   }, []);
 
   if (loading) {
@@ -80,45 +70,48 @@ function ViewSecurityIncidentReport() {
       </div>
     );
   }
+
   return (
     <div className="mt-10 w-11/12 lg:w-4/5 mx-auto">
       <div className="overflow-x-auto shadow-lg rounded-2xl">
         <h1 className="text-lg font-semibold text-center mb-2">
-          View Security Incident Reports
+          View Change Request Forms
         </h1>
         <Table className="min-w-full text-sm text-left text-gray-700">
           <TableHeader className="bg-gray-100 text-gray-800 uppercase text-sm">
             <TableRow>
-              <TableHead className="p-4">Report Date Time</TableHead>
-              <TableHead className="p-4">Reported Severity Level</TableHead>
-              <TableHead className="p-4">Business Impacted</TableHead>
-              <TableHead className="p-4">Location of Incident</TableHead>
-              <TableHead className="p-4">Action</TableHead>
+              <TableHead className="p-4">CR Number</TableHead>
+              <TableHead className="p-4">Project Name</TableHead>
+              <TableHead className="p-4">Submitter</TableHead>
+              <TableHead className="p-4">Type</TableHead>
+              <TableHead className="p-4">Priority</TableHead>
+              <TableHead className="p-4">Decision</TableHead>
+              <TableHead className="p-4">Decision Date</TableHead>
+              <TableHead className="p-4 text-center">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {formInfo.length !== 0 ? (
-              formInfo.map((form) => (
+            {forms.length !== 0 ? (
+              forms.map((form) => (
                 <TableRow
                   key={form.id}
                   className="hover:bg-gray-50 transition duration-200"
                 >
-                  <TableCell className="p-4">{form.reportDateTime}</TableCell>
-                  <TableCell className="p-4">
-                    {form.reportedSeverityLevel}
-                  </TableCell>
-                  <TableCell className="p-4">{form.businessImpacted}</TableCell>
-                  <TableCell className="p-4">{form.incidentLocation}</TableCell>
+                  <TableCell className="p-4">{form.crNumber}</TableCell>
+                  <TableCell className="p-4">{form.projectName}</TableCell>
+                  <TableCell className="p-4">{form.submitterName}</TableCell>
+                  <TableCell className="p-4">{form.crType}</TableCell>
+                  <TableCell className="p-4">{form.priority}</TableCell>
+                  <TableCell className="p-4">{form.decision}</TableCell>
+                  <TableCell className="p-4">{form.decisionDate}</TableCell>
                   <TableCell className="p-4 text-center">
-                    <Link
-                      to={`/View-Security-Incident-Report-History/${form.id}`}
-                    >
-                      <Button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-xl shadow-sm transition duration-200">
+                    <Link to={`/View-Change-Request-Form-Item/${form.id}`}>
+                      <Button className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-xl shadow-sm transition duration-200">
                         View
                       </Button>
                     </Link>
                     <Button
-                      className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-xl shadow-sm transition duration-200 ml-3"
+                      className="bg-red-500 hover:bg-red-600 text-white py-1 px-3 ml-2 rounded-xl shadow-sm transition duration-200"
                       onClick={() => {
                         const confirmed = window.confirm(
                           "Are you sure you want to delete this form?"
@@ -139,7 +132,7 @@ function ViewSecurityIncidentReport() {
                   colSpan="8"
                   className="text-center p-6 text-gray-500"
                 >
-                  No Security Reports
+                  No Change Request Forms Found
                 </TableCell>
               </TableRow>
             )}
@@ -151,11 +144,11 @@ function ViewSecurityIncidentReport() {
           variant={"outline"}
           className="hover:underline p-3 mr-3 rounded-xl"
         >
-          <Link to={`/View-Security-Incident-Report-History`}>History</Link>
+          <Link to={`/View-Change-Request-Form-History`}>History</Link>
         </Button>
       </div>
     </div>
   );
 }
 
-export default ViewSecurityIncidentReport;
+export default ViewChangeRequestForm;

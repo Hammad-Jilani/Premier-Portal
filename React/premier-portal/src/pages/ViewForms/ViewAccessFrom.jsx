@@ -149,7 +149,14 @@ function ViewAccessFrom() {
                     <Button
                       className="bg-red-500 hover:underline p-3 rounded-xl"
                       to={`/View-Access-Form-Item/:${form.accessControlId}`}
-                      onClick={() => deleteById(form.accessControlId)}
+                      onClick={() => {
+                        const confirmed = window.confirm(
+                          "Are you sure you want to delete this form?"
+                        );
+                        if (confirmed) {
+                          handleDelete(form.id);
+                        }
+                      }}
                     >
                       Delete
                     </Button>

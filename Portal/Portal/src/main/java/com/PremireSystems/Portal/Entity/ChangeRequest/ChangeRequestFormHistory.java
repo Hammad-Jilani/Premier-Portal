@@ -12,22 +12,15 @@ public class ChangeRequestFormHistory {
     private Long id;
 
     private String crNumber;
-
-    private boolean isNormalChange;
-    private boolean isEmergencyChange;
-
+    private String normalChange;
+    private String emergencyChange;
     private String crType;
     private String projectName;
-
     private String submitterName;
     private String departmentOrLocation;
-
-    private String phone;
-    private String email;
-
+    private String phoneOrEmail;
     private LocalDate dateSubmitted;
-
-    private String changeType; // Application, Hardware, etc. - stored as comma-separated or enum
+    private String changeType;
 
     @Column(columnDefinition = "TEXT")
     private String otherChangeDescription;
@@ -36,8 +29,7 @@ public class ChangeRequestFormHistory {
     private String briefDescription;
 
     private LocalDate changeNeededBy;
-
-    private String priority; // Low, Medium, High, Mandatory
+    private String priority;
 
     @Column(columnDefinition = "TEXT")
     private String reasonForChange;
@@ -51,36 +43,30 @@ public class ChangeRequestFormHistory {
     @Column(columnDefinition = "TEXT")
     private String comments;
 
-    private boolean hasAttachments;
+    private String hasAttachments;
     private String attachmentLink;
-
     private LocalDate dateSignedBySubmitter;
 
-//    System Owner
-
-    private Double hourImpact;           // #hrs
-    private Integer durationImpact;      // #days
-    private Double scheduleImpact;       // #hrs
-    private Double costImpact;           // #days (assuming it's cost per day)
+    private Double hourImpact;
+    private Integer durationImpact;
+    private Double scheduleImpact;
+    private Double costImpact;
 
     @Column(columnDefinition = "TEXT")
-    private String commentsBySystemOwner;             // WBS or detailed comment
+    private String commentsBySystemOwner;
 
     @Column(columnDefinition = "TEXT")
-    private String recommendations;      // Cost or additional advice
+    private String recommendations;
 
     @Column(name = "test_plan", columnDefinition = "TEXT")
     private String testPlan;
 
     @Column(name = "rollback_plan", columnDefinition = "TEXT")
     private String rollbackPlan;
-
     private LocalDate dateSignedBySystemOwner;
 
-    // === (3) CHANGE ADVISORY BOARD – DECISION ===
-
     @Column(length = 50)
-    private String decision; // Approved, Approved with Conditions, etc.
+    private String decision;
 
     private LocalDate decisionDate;
 
@@ -92,10 +78,8 @@ public class ChangeRequestFormHistory {
 
     private LocalDate dateSigned;
 
-    // === (4) CHANGE IMPLEMENTATION ===
-
     @Column(length = 50)
-    private String implementedStatus; // Success, Partial Success, Failed
+    private String implementedStatus;
 
     @Column(columnDefinition = "TEXT")
     private String stagingTestResults;
@@ -108,22 +92,22 @@ public class ChangeRequestFormHistory {
 
     private LocalDate implementerDate;
 
-    private LocalDateTime modified;
     private String status;
+    private LocalDateTime modifiedAt;
+    private Long changeRequestFormId;
 
-    public ChangeRequestFormHistory(){}
+    public  ChangeRequestFormHistory(){}
 
-    public ChangeRequestFormHistory(Long id, String crNumber, boolean isNormalChange, boolean isEmergencyChange, String crType, String projectName, String submitterName, String departmentOrLocation, String phone, String email, LocalDate dateSubmitted, String changeType, String otherChangeDescription, String briefDescription, LocalDate changeNeededBy, String priority, String reasonForChange, String environmentsImpacted, String assumptionsAndNotes, String comments, boolean hasAttachments, String attachmentLink, LocalDate dateSignedBySubmitter, Double hourImpact, Integer durationImpact, Double scheduleImpact, Double costImpact, String commentsBySystemOwner, String recommendations, String testPlan, String rollbackPlan, LocalDate dateSignedBySystemOwner, String decision, LocalDate decisionDate, String decisionExplanation, String conditions, LocalDate dateSigned, String implementedStatus, String stagingTestResults, String implementationTestResults, String remarks, LocalDate implementerDate, LocalDateTime modified, String status) {
+    public ChangeRequestFormHistory(Long id, String crNumber, String normalChange, String emergencyChange, String crType, String projectName, String submitterName, String departmentOrLocation, String phoneOrEmail, LocalDate dateSubmitted, String changeType, String otherChangeDescription, String briefDescription, LocalDate changeNeededBy, String priority, String reasonForChange, String environmentsImpacted, String assumptionsAndNotes, String comments, String hasAttachments, String attachmentLink, LocalDate dateSignedBySubmitter, Double hourImpact, Integer durationImpact, Double scheduleImpact, Double costImpact, String commentsBySystemOwner, String recommendations, String testPlan, String rollbackPlan, LocalDate dateSignedBySystemOwner, String decision, LocalDate decisionDate, String decisionExplanation, String conditions, LocalDate dateSigned, String implementedStatus, String stagingTestResults, String implementationTestResults, String remarks, LocalDate implementerDate, String status, LocalDateTime modifiedAt, Long changeRequestFormId) {
         this.id = id;
         this.crNumber = crNumber;
-        this.isNormalChange = isNormalChange;
-        this.isEmergencyChange = isEmergencyChange;
+        this.normalChange = normalChange;
+        this.emergencyChange = emergencyChange;
         this.crType = crType;
         this.projectName = projectName;
         this.submitterName = submitterName;
         this.departmentOrLocation = departmentOrLocation;
-        this.phone = phone;
-        this.email = email;
+        this.phoneOrEmail = phoneOrEmail;
         this.dateSubmitted = dateSubmitted;
         this.changeType = changeType;
         this.otherChangeDescription = otherChangeDescription;
@@ -156,8 +140,9 @@ public class ChangeRequestFormHistory {
         this.implementationTestResults = implementationTestResults;
         this.remarks = remarks;
         this.implementerDate = implementerDate;
-        this.modified = modified;
         this.status = status;
+        this.modifiedAt = modifiedAt;
+        this.changeRequestFormId = changeRequestFormId;
     }
 
     public Long getId() {
@@ -176,20 +161,20 @@ public class ChangeRequestFormHistory {
         this.crNumber = crNumber;
     }
 
-    public boolean isNormalChange() {
-        return isNormalChange;
+    public String getNormalChange() {
+        return normalChange;
     }
 
-    public void setNormalChange(boolean normalChange) {
-        isNormalChange = normalChange;
+    public void setNormalChange(String normalChange) {
+        this.normalChange = normalChange;
     }
 
-    public boolean isEmergencyChange() {
-        return isEmergencyChange;
+    public String getEmergencyChange() {
+        return emergencyChange;
     }
 
-    public void setEmergencyChange(boolean emergencyChange) {
-        isEmergencyChange = emergencyChange;
+    public void setEmergencyChange(String emergencyChange) {
+        this.emergencyChange = emergencyChange;
     }
 
     public String getCrType() {
@@ -224,20 +209,12 @@ public class ChangeRequestFormHistory {
         this.departmentOrLocation = departmentOrLocation;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneOrEmail() {
+        return phoneOrEmail;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPhoneOrEmail(String phoneOrEmail) {
+        this.phoneOrEmail = phoneOrEmail;
     }
 
     public LocalDate getDateSubmitted() {
@@ -320,11 +297,11 @@ public class ChangeRequestFormHistory {
         this.comments = comments;
     }
 
-    public boolean isHasAttachments() {
+    public String getHasAttachments() {
         return hasAttachments;
     }
 
-    public void setHasAttachments(boolean hasAttachments) {
+    public void setHasAttachments(String hasAttachments) {
         this.hasAttachments = hasAttachments;
     }
 
@@ -496,19 +473,27 @@ public class ChangeRequestFormHistory {
         this.implementerDate = implementerDate;
     }
 
-    public LocalDateTime getModified() {
-        return modified;
-    }
-
-    public void setModified(LocalDateTime modified) {
-        this.modified = modified;
-    }
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public LocalDateTime getModifiedAt() {
+        return modifiedAt;
+    }
+
+    public void setModifiedAt(LocalDateTime modifiedAt) {
+        this.modifiedAt = modifiedAt;
+    }
+
+    public Long getChangeRequestFormId() {
+        return changeRequestFormId;
+    }
+
+    public void setChangeRequestFormId(Long changeRequestFormId) {
+        this.changeRequestFormId = changeRequestFormId;
     }
 }

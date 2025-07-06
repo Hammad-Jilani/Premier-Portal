@@ -116,7 +116,14 @@ function ViewAssetHandoverReport() {
                     </Link>
                     <Button
                       className="bg-red-500 hover:bg-red-600 text-white py-1 px-3 ml-2 rounded-xl shadow-sm transition duration-200"
-                      onClick={() => handleDelete(form.id)}
+                      onClick={() => {
+                        const confirmed = window.confirm(
+                          "Are you sure you want to delete this form?"
+                        );
+                        if (confirmed) {
+                          handleDelete(form.id);
+                        }
+                      }}
                     >
                       Delete
                     </Button>

@@ -117,7 +117,14 @@ function ViewMediaDisposalForm() {
                     </Link>
                     <Button
                       className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-xl shadow-sm transition duration-200 ml-3"
-                      onClick={() => handleDelete(form.id)}
+                      onClick={() => {
+                        const confirmed = window.confirm(
+                          "Are you sure you want to delete this form?"
+                        );
+                        if (confirmed) {
+                          handleDelete(form.id);
+                        }
+                      }}
                     >
                       Delete
                     </Button>

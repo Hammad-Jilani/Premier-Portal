@@ -32,6 +32,10 @@ import ViewAssetHandoverReport from "./pages/ViewForms/ViewAssetHandoverReport";
 import AssetHandoverReportItem from "./pages/Forms/AssetHandoverReport/AssetHandoverReportItem";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import AssetHandOverFormHistory from "./pages/History/AssetHandOverFormHistory";
+import CreateChangeRequestForm from "./pages/ChangeRequestForm/CreateChangeRequestForm";
+import ViewChangeRequestForm from "./pages/ViewForms/ViewChangeRequestForm";
+import ChangeRequestFormItem from "./pages/ChangeRequestForm/ChangeRequestFormItem";
+import ChangeRequestFormHistory from "./pages/History/ChangeRequestFormHistory";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -145,6 +149,26 @@ function App() {
               element={<AssetHandoverReportItem />}
             />
             <Route path={"*"} element={<ErrorPage />} />
+
+            <Route
+              path="/Create-Change-Request-Form"
+              element={<CreateChangeRequestForm />}
+            />
+
+            <Route
+              path="/View-Change-Request-Form"
+              element={<ViewChangeRequestForm />}
+            />
+
+            <Route
+              path="/View-Change-Request-Form-Item/:id"
+              element={<ChangeRequestFormItem />}
+            />
+
+            <Route
+              path="/View-Change-Request-Form-History"
+              element={<ChangeRequestFormHistory />}
+            />
           </Routes>
         </>
       ) : (
