@@ -26,6 +26,7 @@ import { API_BASE_URL } from "../../../config/api";
 import { toast } from "sonner";
 
 import { Input } from "../../../components/ui/input";
+import { useNavigate } from "react-router-dom";
 
 function SapForm() {
   const form = useForm({
@@ -75,6 +76,7 @@ function SapForm() {
     },
   });
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   async function create(userData) {
     try {
@@ -91,6 +93,7 @@ function SapForm() {
       setLoading(true);
       console.log(response.data);
       toast.success("Created SAP Form Successfully");
+      navigate(-1);
     } catch (error) {
       console.log(error);
     }

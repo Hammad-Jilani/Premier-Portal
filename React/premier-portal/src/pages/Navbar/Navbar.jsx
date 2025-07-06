@@ -29,7 +29,7 @@ function Navbar() {
           Portal
         </Link>
 
-        <div className="hidden md:flex space-x-4">
+        {/* <div className="hidden md:flex space-x-4">
           <Link to="/create-access-control-form" className="hover:underline">
             Create Access Form
           </Link>
@@ -42,13 +42,17 @@ function Navbar() {
           <Link to="/Create-sap-access-form" className="hover:underline">
             Create Sap access form
           </Link>
+
           <Link
             to="/Create-Security-Incident-Report"
             className="hover:underline"
           >
             Create Security Incident Report
           </Link>
-        </div>
+          <Link to="/Create-Asset-Handover-Report" className="hover:underline">
+            Create Asset Handover Report
+          </Link>
+        </div> */}
 
         {/* Profile Dropdown */}
         <div className="flex items-center space-x-4">
@@ -68,7 +72,7 @@ function Navbar() {
 
           {/* Hamburger Button */}
           <button
-            className="md:hidden focus:outline-none"
+            className="focus:outline-none"
             onClick={() => setMenuOpen(!menuOpen)}
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -78,21 +82,41 @@ function Navbar() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden mt-2 flex flex-col space-y-2">
-          <Link to="/create-access-control-form" className="hover:underline">
+        <div className=" mt-2 flex flex-col space-y-2">
+          <Link
+            to="/create-access-control-form"
+            className="hover:underline"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
             Create Access Form
           </Link>
-          <Link to="/Create-Media-Disposal-Form" className="hover:underline">
+          <Link
+            to="/Create-Media-Disposal-Form"
+            className="hover:underline"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
             Create Media Disposal Form
           </Link>
-          <Link to="/Create-sap-access-form" className="hover:underline">
+          <Link
+            to="/Create-sap-access-form"
+            className="hover:underline"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
             Create Sap access form
           </Link>
           <Link
             to="/Create-Security-Incident-Report"
             className="hover:underline"
+            onClick={() => setMenuOpen(!menuOpen)}
           >
             Create Security Incident Report
+          </Link>
+          <Link
+            to="/Create-Asset-Handover-Report"
+            className="hover:underline"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            Create Asset Handover Report
           </Link>
         </div>
       )}

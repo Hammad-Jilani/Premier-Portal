@@ -53,6 +53,16 @@ function Home() {
               </p>
             </Card>
           </Link>
+          <Link to="/View-Asset-Handover-Report" className="group">
+            <Card className="bg-white p-8 rounded-2xl shadow-md text-center transition-transform transform group-hover:scale-105 md:h-44">
+              <h2 className="text-xl font-semibold text-gray-700 mb-2">
+                View Asset Handover Report
+              </h2>
+              <p className="text-gray-500 capitalize">
+                Review all Asset Handover Report.
+              </p>
+            </Card>
+          </Link>
         </div>
       </div>
     </div>

@@ -75,7 +75,7 @@ function AccessControlFormItem() {
 
   function OnhandleSubmit(data) {
     updateForm(data);
-    navigate("/View-Access-Forms");
+    navigate(-1);
     form.reset();
   }
 

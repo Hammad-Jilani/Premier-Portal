@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { API_BASE_URL } from "../../../config/api";
 import { CirclesWithBar } from "react-loader-spinner";
 import { useForm } from "react-hook-form";
@@ -27,6 +27,7 @@ function MediaDisposalFormItem() {
   const { id } = useParams();
   const [formItem, setFormItem] = useState({});
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
   // const []
 
   const form = useForm({
@@ -133,6 +134,7 @@ function MediaDisposalFormItem() {
 
   function onSubmit(userData) {
     update(userData);
+    navigate(-1);
   }
 
   return (

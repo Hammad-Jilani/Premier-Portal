@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Card } from "../../../components/ui/card";
@@ -32,6 +32,7 @@ function SapFormItem() {
   const { id } = useParams();
   const [formInfo, setFormInfo] = useState({});
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const form = useForm({
     defaultValues: {
@@ -124,6 +125,7 @@ function SapFormItem() {
   function onSubmit(userData) {
     update(userData);
     form.reset();
+    navigate(-1);
   }
 
   useEffect(() => {

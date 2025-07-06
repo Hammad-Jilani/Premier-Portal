@@ -20,6 +20,7 @@ import { Button } from "../../../components/ui/button";
 import axios from "axios";
 import { API_BASE_URL } from "../../../config/api";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 function CreateMediaDisposalForm() {
   const form = useForm({
@@ -42,6 +43,7 @@ function CreateMediaDisposalForm() {
       validatedDate: "",
     },
   });
+  const navigate = useNavigate();
 
   async function saveMediaDisposalForm(data) {
     try {
@@ -67,6 +69,7 @@ function CreateMediaDisposalForm() {
 
   function onSubmit(userData) {
     saveMediaDisposalForm(userData);
+    navigate(-1);
   }
 
   return (

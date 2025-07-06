@@ -153,7 +153,7 @@ function SecurityIncidentReportItem() {
       );
       toast.success("Updated Successfully!");
       setLoading(false);
-      navigate("/View-Security-Incident-Report");
+      navigate(-1);
     } catch (error) {
       toast.error("Failed to Update Report!!");
     }

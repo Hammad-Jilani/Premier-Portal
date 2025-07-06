@@ -27,6 +27,11 @@ import SecurityIncidentReport from "./pages/Forms/SecurityIncidentReport/Securit
 import ViewSecurityIncidentReport from "./pages/ViewForms/ViewSecurityIncidentReport";
 import SecurityIncidentReportHistory from "./pages/History/SecurityIncidentReportHistory";
 import SecurityIncidentReportItem from "./pages/Forms/SecurityIncidentReport/SecurityIncidentReportItem";
+import AssetHandoverReport from "./pages/Forms/AssetHandoverReport/AssetHandoverReport";
+import ViewAssetHandoverReport from "./pages/ViewForms/ViewAssetHandoverReport";
+import AssetHandoverReportItem from "./pages/Forms/AssetHandoverReport/AssetHandoverReportItem";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
+import AssetHandOverFormHistory from "./pages/History/AssetHandOverFormHistory";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -117,10 +122,29 @@ function App() {
               path={"/View-Security-Incident-Report-History"}
               element={<SecurityIncidentReportHistory />}
             />
+
             <Route
               path={"/View-Security-Incident-Report-History/:id"}
               element={<SecurityIncidentReportItem />}
             />
+
+            <Route
+              path={"/Create-Asset-Handover-Report"}
+              element={<AssetHandoverReport />}
+            />
+            <Route
+              path={"/View-Asset-Handover-Report"}
+              element={<ViewAssetHandoverReport />}
+            />
+            <Route
+              path={"/View-Asset-Handover-Report-History"}
+              element={<AssetHandOverFormHistory />}
+            />
+            <Route
+              path={"/View-Asset-Handover-Report-Item/:id"}
+              element={<AssetHandoverReportItem />}
+            />
+            <Route path={"*"} element={<ErrorPage />} />
           </Routes>
         </>
       ) : (

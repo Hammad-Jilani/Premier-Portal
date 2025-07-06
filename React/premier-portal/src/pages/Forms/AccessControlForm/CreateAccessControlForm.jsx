@@ -26,6 +26,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { createForm } from "../../../Redux/createAccessForm/ActionType";
 import { Loader2Icon } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function CreateAccessControlForm() {
   const form = useForm({
@@ -61,6 +62,8 @@ function CreateAccessControlForm() {
     },
   });
 
+  const navigate = useNavigate();
+
   const { fields, append, remove } = useFieldArray({
     control: form.control,
     name: "applicationAccessRightsList",
@@ -76,6 +79,7 @@ function CreateAccessControlForm() {
     // form.resetField("startDate");
     // form.resetField("endDate");
     form.reset();
+    navigate(-1);
   }
 
   if (createAccessForm.loading) {

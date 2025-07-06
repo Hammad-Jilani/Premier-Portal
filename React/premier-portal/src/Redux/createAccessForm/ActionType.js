@@ -1,6 +1,7 @@
 import { toast } from "sonner";
-import api from "../../config/api"
+import api, { API_BASE_URL } from "../../config/api"
 import { CREATE_FORM_FAILURE, CREATE_FORM_REQUEST, CREATE_FORM_SUCCESS } from "./Action"
+import axios from "axios";
 
 export function createForm(usreData) {
   return async function (dispatch) {
@@ -9,7 +10,14 @@ export function createForm(usreData) {
     
     
     try {
-      const { data } = await api.post('/access-control-form/create',usreData)
+      const { data } = await axios.post(`${API_BASE_URL}/access-control-form/create`,usreData,{
+        
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            "Content-Type": "application/json",
+          },
+        
+      })
       console.log("in reducer data and usreData", data, usreData);
       
 
